@@ -1,0 +1,28 @@
+create database bar;
+use bar;
+
+create table sesiones(
+    id int not null auto_increment primary key,
+    correo varchar(30) not null,
+    contrasena varchar(30) not null,
+    rol int not null default 0
+); 
+
+insert into sesiones values("","mauricio@gmail.com","1234",1);
+insert into sesiones values("","munguia@gmail.com","1234","");
+
+
+create table empleado(
+    id int not null auto_increment primary key,
+    nombre varchar(30),
+    p_apellido varchar(30),
+    s_apellido varchar(30),
+    telefono int,
+    email varchar(20),
+    direccion varchar(30),
+    puesto varchar(20),
+    rol int,
+    salario int
+);
+
+insert into empleado values("","Mauricio","Munguia","Garcia",5517287218,"mau@gmail.com","casa","mesero",0,2500);
