@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Empleados <span class="sr-only"></span></a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="#">Orden de venta</a>
+            </li>
+              </a>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Menus</a>
+              </li>
+                </a>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Iniciar sesion</a>
+                  </li>
+                    </a>
+            <li>
+                <p id="sesion">Visitante</p>
+            </li>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li>
+            
+          </form>
+        </div>
+      </nav>
+    <h1>Orden de venta</h1>
+    <select name="restaurantes" id="combo_restaurantes">
+        <option value="1">Atizapan</option>
+        <option value="2">Nicolas Romero</option>
+        <option value="3">Tlalnepantla</option>
+    </select><br>
+    <input type="text" id="txt_id" placeholder="Id"><br>
+    <input type="text" id="txt_name" placeholder="Nombre"><br>
+    <input type="text" id="txt_puesto" placeholder="Puesto"><br>
+    <select name="comida" id="combo_comida">
+        <option value="1">Desayunos</option>
+        <option value="2">Platillos</option>
+        <option value="3">Bebidas</option>
+        <option value="4">Postres</option>
+    </select>
+    <div class="selecciona">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">Pozole</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">Sopa</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">Arroz</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">Pasta</label>
+        </div>
+          
+    </div>
+    <input type="text" id="txt_total" placeholder="Total"><br>
+    <script src="inicio.js"></script>
+</body>
+</html>
