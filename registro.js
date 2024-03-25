@@ -13,7 +13,7 @@ function addEvent(ele,eve,fun,cap){
 
 //funcion principal
 function cargar(){      
-    addEvent(document.getElementById("btn_guardar"),"click",guardarEmpleado,false);
+    addEvent(document.getElementById("btn_guardar"),"click",verificaCampos,false);
     
 }
 function datos(){
@@ -28,9 +28,17 @@ function datos(){
     salario=document.getElementById("txt_sal").value;
     //alert(direccion)
 }
+function verificaCampos(){
+    datos();
+    if(nombre=="" || p_apellido=="" || s_apellido=="" || telefono=="" || email=="" || direccion=="" || puesto=="" || rol=="" || salario==""){
+        alert("Datos incompletos")
+    }else{
+        guardarEmpleado();
+    }
+}
 //registrar nuevo usuario
 function guardarEmpleado(){
-    datos();
+
     conexion=xmlhttprequest();
     conexion.onreadystatechange=esperaResultado1;
     conexion.open("POST","guardar.php",true); 
