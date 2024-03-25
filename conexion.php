@@ -1,5 +1,5 @@
 <?php
 
-$cn = new mysqli("localhost", "root", "12345678", "bar");
+$cn = new mysqli("localhost", "root", "12345678", "restaurante");
 
 ?>
