@@ -10,9 +10,65 @@ function addEvent(ele,eve,fun,cap){
     else
         ele.addEventListener(eve,fun,cap);
 }
-
 //funcion principal
-function cargar(){      
+function cargar(){
+    crearLogIn();
+
+}
+//carga todo el login
+function crearLogIn(){
+    let div1 = document.getElementById("cuerpo")
+    let fragment = document.createDocumentFragment();
+    let div2 = document.createElement('div');
+    let form = document.createElement('form');
+    let h3 = document.createElement('h3');
+    let inp1 = document.createElement('input');
+    let inp2 = document.createElement('input');
+    let btn1 = document.createElement('button');
+    let btn2 = document.createElement('button');
+
+    form.setAttribute('name',"sesion");
+    form.setAttribute('method',"post");
+
+    h3.textContent = "Inicio de sesion";
+
+    div2.setAttribute('class',"insertar");
+
+    inp1.setAttribute('type',"text");
+    inp1.setAttribute('id',"txt_email");
+    inp1.setAttribute('class',"form-control col-md-5");
+    inp1.setAttribute('placeholder',"Correo");
+
+    inp2.setAttribute('type',"password");
+    inp2.setAttribute('id',"txt_contrasena");
+    inp2.setAttribute('class',"form-control col-md-5");
+    inp2.setAttribute('placeholder',"Contraseña");
+
+    btn1.setAttribute('type',"button");
+    btn1.setAttribute('id',"btn_registrar");
+    btn1.textContent = "Registrar";
+
+    btn2.setAttribute('type',"button");
+    btn2.setAttribute('id',"btn_iniciar_sesion");
+    btn2.textContent = "Iniciar Sesion";
+
+    div2.appendChild(inp1);
+    div2.appendChild(inp2);
+    div2.appendChild(btn1);
+    div2.appendChild(btn2);
+
+    form.appendChild(h3);
+    form.appendChild(div2);
+
+    fragment.appendChild(form);
+
+    div1.appendChild(fragment);
+
+    cargarlogIn();
+
+}
+//funcion de log in
+function cargarlogIn(){      
     addEvent(document.getElementById("btn_iniciar_sesion"),"click",iniciarSesion,false);
     addEvent(document.getElementById("btn_registrar"),"click",registrar,false);
 }
