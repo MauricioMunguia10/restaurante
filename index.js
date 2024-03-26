@@ -34,7 +34,7 @@ function crearLogIn(){
 
     div2.setAttribute('class',"insertar");
 
-    inp1.setAttribute('type',"text");
+    inp1.setAttribute('type',"email");
     inp1.setAttribute('id',"txt_email");
     inp1.setAttribute('class',"form-control col-md-5");
     inp1.setAttribute('placeholder',"Correo");
@@ -69,16 +69,32 @@ function crearLogIn(){
 }
 //funcion de log in
 function cargarlogIn(){      
-    addEvent(document.getElementById("btn_iniciar_sesion"),"click",iniciarSesion,false);
-    addEvent(document.getElementById("btn_registrar"),"click",registrar,false);
+    addEvent(document.getElementById("btn_iniciar_sesion"),"click",verificaInicio,false);
+    addEvent(document.getElementById("btn_registrar"),"click",verificaRegistro,false);
 }
-function datos(){
+function verificaRegistro(){
+    datosLogIn();
+    if(correo=="" || contrasena==""){
+        alert("Datos incompletos");
+    }else{
+        registrar();
+    }
+}
+function verificaInicio(){
+    datosLogIn();
+    if(correo=="" || contrasena==""){
+        alert("Datos incompletos");
+    }else{
+        iniciarSesion();
+    }
+}
+function datosLogIn(){
     correo=document.getElementById("txt_email").value;
     contrasena=document.getElementById("txt_contrasena").value;
 }
 //registrar nuevo usuario
 function registrar(){
-    datos();
+    //datos();
     conexion=xmlhttprequest();
     conexion.onreadystatechange=esperaResultado1;
     conexion.open("POST","registrar.php",true); 
@@ -94,7 +110,7 @@ function esperaResultado1(){
 }
 //iniciar sesion
 function iniciarSesion(){
-    datos();
+    //datos();
     conexion=xmlhttprequest();
     conexion.onreadystatechange=esperaResultado;
     conexion.open("POST","sesiones.php",true); 
