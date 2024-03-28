@@ -26,15 +26,20 @@ create table empleado(
 
 insert into empleado values("","Mauricio","Munguia","Garcia",5517287218,"mau@gmail.com","casa","mesero",0,2500);
 
-create table orden(
+create table sucursal(
     id int not null auto_increment primary key,
-    sucursal varchar(30),
-    empleado varchar(20),
-    comida varchar(50),
-    total int
+    nombre varchar(20)
 );
 
-insert into orden values ("","Nicolas Romero","Mauricio","pozole,pasta,ensalada,coca,tiramisu",1782);
+insert into sucursal values("","Nicolas Romero");
+
+create table cliente(
+    id int not null auto_increment primary key,
+    mesa int,
+    nombre varchar(30)
+);
+
+insert into cliente values("",1,"Rodrigo Garcia");
 
 create table comida(
     id int not null auto_increment primary key,
@@ -44,3 +49,14 @@ create table comida(
 );
 
 insert into comida values ("","pozole","450 gr", 78);
+
+create table orden(
+    id int not null auto_increment primary key,
+    cliente_id int,
+    comida_id int,
+    foreign key(cliente_id) references cliente(id),
+    foreign key(comida_id) references comida(id),
+    total int
+);
+
+insert into orden values ("",1,1,178);
