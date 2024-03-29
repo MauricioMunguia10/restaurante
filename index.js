@@ -1,6 +1,9 @@
 //Variables globales
 let count=0;
 let correo,contrasena;
+let url;
+let sesion;
+let nombre,p_apellido,s_apellido,telefono,email,direccion,puesto,rol,salario;
 
 //identifica el navegador
 addEvent(window,'load',cargar, false);
@@ -11,7 +14,38 @@ function addEvent(ele,eve,fun,cap){
         ele.addEventListener(eve,fun,cap);
 }
 //funcion principal
-function cargar(){      
+function cargar(){
+    url=window.location;
+    buscaUrl();
+}
+function buscaUrl(){
+    //datos();
+    conexion=xmlhttprequest();
+    conexion.onreadystatechange=esperaUrl;
+    conexion.open("POST","php/url.php",true); 
+    conexion.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    conexion.send("v1="+url);
+}
+function esperaUrl(){
+    count++;
+    if(conexion.readyState==4){
+        let opc = conexion.responseText;
+        if(opc=="index.html")
+            cargarLogIn();
+        else if (opc=="inicio.html")  
+            cargarInicio();
+        else if (opc=="menu.html")  
+            cargarMenu();
+        else if (opc=="orden.html")  
+            cargarOrden();
+        else if (opc=="empleado.html")  
+            cargarEmpleado();
+        count=0;
+    }
+    
+}
+//Log In
+function cargarLogIn(){   
     addEvent(document.getElementById("btn_iniciar_sesion"),"click",verificaInicio,false);
     addEvent(document.getElementById("btn_registrar"),"click",verificaRegistro,false);
 }
@@ -34,6 +68,34 @@ function verificaInicio(){
 function datos(){
     correo=document.getElementById("txt_email").value;
     contrasena=document.getElementById("txt_contrasena").value;
+}
+//funcion de inicio
+function cargarInicio(){      
+    buscaSesion();
+    
+}
+
+//registrar nuevo usuario
+function buscaSesion(){
+    
+    conexion=xmlhttprequest();
+    conexion.onreadystatechange=esperaSesion;
+    conexion.open("POST","php/busca_sesion.php",true); 
+    conexion.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    conexion.send();
+}
+function esperaSesion(){
+    count++;
+    if(conexion.readyState==4){
+        //alert(conexion.responseText);  
+        sesion=conexion.responseText;
+        imprimirUsuario();
+        count=0;
+    }
+}
+function imprimirUsuario(){
+    alert("imprimir"+sesion);
+    document.getElementById("txt_usuario").innerHTML = '<span class="navbar-text" id="txt_usuario">Usuario: '+sesion+' </span>';
 }
 //registrar nuevo usuario
 function registrar(){
@@ -78,9 +140,53 @@ function esperaResultado(){
     }
 }
 
-
 function xmlhttprequest(){
     return new XMLHttpRequest();
+}
+
+
+//registro empleados
+//funcion principal
+function cargarEmpleado(){      
+    addEvent(document.getElementById("btn_guardar"),"click",verificaCampos,false);
+    
+}
+function datosEmpleado(){
+    nombre=document.getElementById("txt_nom").value;
+    p_apellido=document.getElementById("txt_pape").value;
+    s_apellido=document.getElementById("txt_sape").value;
+    telefono=document.getElementById("txt_tel").value;
+    email=document.getElementById("txt_email").value;
+    direccion=document.getElementById("txt_direccion").value;
+    puesto=document.getElementById("txt_puesto").value;
+    rol=document.getElementById("combo").value;
+    salario=document.getElementById("txt_sal").value;
+    //alert(direccion)
+}
+function verificaCampos(){
+    datosEmpleado();
+    if(nombre=="" || p_apellido=="" || s_apellido=="" || telefono=="" || email=="" || direccion=="" || puesto=="" || rol=="" || salario==""){
+        alert("Datos incompletos")
+    }else{
+        guardarEmpleado();
+    }
+}
+//registrar nuevo usuario
+function guardarEmpleado(){
+
+    conexion=xmlhttprequest();
+    conexion.onreadystatechange=esperaGuardar;
+    conexion.open("POST","php/guardar.php",true); 
+    conexion.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    conexion.send("v1="+nombre+"&v2="+p_apellido+"&v3="+s_apellido+"&v4="+telefono+"&v5="+email
+    +"&v6="+direccion+"&v7="+puesto+"&v8="+rol+"&v9="+salario);
+}
+function esperaGuardar(){
+    count++;
+    if(conexion.readyState==4){
+        alert(conexion.responseText);  
+        count=0;
+    }
 }
 
 //MMG
