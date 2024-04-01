@@ -42,9 +42,19 @@ function esperaUrl(){
             cargarEmpleado();
         count=0;
     }
-    
+ 
+}
+//orden de venta
+function cargarOrden(){
+    buscaSesion();
 }
 //Log In
+function validarEmail(email) {
+    // Expresión regular para validar un correo electrónico
+    const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    return regex.test(email);
+}
+
 function cargarLogIn(){   
     addEvent(document.getElementById("btn_iniciar_sesion"),"click",verificaInicio,false);
     addEvent(document.getElementById("btn_registrar"),"click",verificaRegistro,false);
@@ -54,7 +64,10 @@ function verificaRegistro(){
     if(correo=="" || contrasena==""){
         alert("Datos incompletos");
     }else{
-        registrar();
+        if(validarEmail(correo))
+            registrar();
+        else
+            alert("email invalido");
     }
 }
 function verificaInicio(){
@@ -62,7 +75,10 @@ function verificaInicio(){
     if(correo=="" || contrasena==""){
         alert("Datos incompletos");
     }else{
-        iniciarSesion();
+        if(validarEmail(correo))
+            iniciarSesion();
+        else
+            alert("email invalido");
     }
 }
 function datos(){
@@ -70,7 +86,7 @@ function datos(){
     contrasena=document.getElementById("txt_contrasena").value;
 }
 //funcion de inicio
-function cargarInicio(){      
+function cargarInicio(){     
     buscaSesion();
     
 }
@@ -85,6 +101,7 @@ function buscaSesion(){
     conexion.send();
 }
 function esperaSesion(){
+    
     count++;
     if(conexion.readyState==4){
         //alert(conexion.responseText);  
@@ -94,7 +111,7 @@ function esperaSesion(){
     }
 }
 function imprimirUsuario(){
-    alert("imprimir"+sesion);
+    //alert("imprimir"+sesion);
     document.getElementById("txt_usuario").innerHTML = '<span class="navbar-text" id="txt_usuario">Usuario: '+sesion+' </span>';
 }
 //registrar nuevo usuario
@@ -149,6 +166,7 @@ function xmlhttprequest(){
 //funcion principal
 function cargarEmpleado(){      
     addEvent(document.getElementById("btn_guardar"),"click",verificaCampos,false);
+    buscaSesion();
     
 }
 function datosEmpleado(){
