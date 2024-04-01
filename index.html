@@ -4,19 +4,41 @@
       <title> Sesion </title>
       <!-- Bootstrap CSS -->
       <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> 
+      <link rel="stylesheet" href="style.css">
    </head>
    <body>
-      <form name="Sesion" method="post">
-         <h3>Sesion</h3>
-         <div class="insertar">
-            <input type="email" id="txt_email" placeholder="Correo" class="form-control col-md-5"><br>
-            <input type="password" id="txt_contrasena" placeholder="Contrasena" class="form-control col-md-5"><br>
-            <button type="button" id="btn_registrar" >Registrar</button>
-            <button type="button" id="btn_iniciar_sesion" >Iniciar sesion</button><br>
-         </div>
-         
-      </form>
+      <div class="formulario">
+         <form name="sesion" method="post" >
+            <h1>Iniciar Sesi&oacute;n</h1><center>
+            <img src="img/logo.png"  class="img-fluid" alt="logo" width="180px">
+         </center>
+            <div class="container">
+               <div class="input-container">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                  <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
+                  </svg>
+                  <input type="text" id="txt_email" class="form-control" placeholder="Correo" required style="width: 300px;">
+               </div>
+            </div>
+   
+            <div class="container">
+               <div class="input-container">
+               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-lock" viewBox="0 0 16 16">
+                  <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2m3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2M5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1"/>
+               </svg>
+                  <input type="password" id="txt_contrasena" class="form-control" placeholder="Contrase&ntilde;a" required style="width: 300px;">
+               </div>
+            </div>
+            <div class="container">
+               <input type="button" value="Registrar" id="btn_registrar">
+               <input type="button" value="Iniciar Sesi&oacute;n" id="btn_iniciar_sesion">  
+            </div>
+   
+            
+         </form>
+      </div>
       <!-- Bootstrap JS y dependencias -->
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
       <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

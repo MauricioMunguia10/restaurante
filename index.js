@@ -161,7 +161,7 @@ function xmlhttprequest(){
     return new XMLHttpRequest();
 }
 
-
+//empleados
 //registro empleados
 //funcion principal
 function cargarEmpleado(){      
@@ -179,7 +179,7 @@ function datosEmpleado(){
     puesto=document.getElementById("txt_puesto").value;
     rol=document.getElementById("combo").value;
     salario=document.getElementById("txt_sal").value;
-    //alert(direccion)
+    //alert(puesto)
 }
 function verificaCampos(){
     datosEmpleado();
@@ -198,6 +198,7 @@ function guardarEmpleado(){
     conexion.setRequestHeader("Content-type","application/x-www-form-urlencoded");
     conexion.send("v1="+nombre+"&v2="+p_apellido+"&v3="+s_apellido+"&v4="+telefono+"&v5="+email
     +"&v6="+direccion+"&v7="+puesto+"&v8="+rol+"&v9="+salario);
+    //alert(puesto)
 }
 function esperaGuardar(){
     count++;

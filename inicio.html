@@ -11,7 +11,7 @@
 <body>
     
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Logo</a>
+    <img src="img/logo.png" class="img" alt="imagen principal" width="80" />
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
     </button>
@@ -31,28 +31,33 @@
           <a class="nav-link" href="menu.html">Menus</a>
         </li>
       </ul>
-      <div class="form-inline my-2 my-lg-0">
+      <div class="form-inline my-2 my-lg-0 mr-auto">
         <span class="navbar-text" id="txt_usuario">
           Usuario:
         </span>
       </div>
-      <button class="btn btn-outline-danger my-2 my-sm-0 " type="submit" id="btn_cerrar_sesion">Cerrar sesion</button>
+      <div class="form-inline ml-auto">
+        <button class="btn btn-outline-danger my-2 my-sm-0 " type="submit" id="btn_cerrar_sesion">Cerrar sesion</button>
+      </div>
+      
     </div>
   </nav>
-  <div>
-    <h1>Inicio</h1>
-    <img src="img1.jpg" class="img" alt="imagen principal">
-    <h2>Nosotros</h2>
-    <p>¡Bienvenidos a Delicias, tu destino gastronómico definitivo para deleitar tus sentidos! En nuestro restaurante, fusionamos la pasión por la cocina con ingredientes frescos y técnicas culinarias innovadoras para ofrecerte una experiencia culinaria única.
-
-        En Delicias, cada plato es una obra maestra cuidadosamente elaborada por nuestro talentoso equipo de chefs, que se esfuerzan por sorprenderte con sabores auténticos y presentaciones cautivadoras. Desde nuestros exquisitos entrantes hasta nuestros decadentes postres, cada bocado te transportará a un mundo de sabores y sensaciones inigualables.
-        
-        Nuestra carta refleja una variedad de influencias culinarias, desde lo tradicional hasta lo contemporáneo, garantizando que haya algo para todos los paladares. Además, nuestra selección de vinos y cócteles complementará a la perfección tu experiencia gastronómica, elevando aún más tus sentidos.
-        
-        En Delicias, no solo nos esforzamos por ofrecer una deliciosa comida, sino también un ambiente acogedor y un servicio impecable. Ya sea una cena romántica, una comida en familia o una reunión de negocios, estamos aquí para hacer que cada momento sea memorable.
-        
-        Únete a nosotros en Delicias y descubre por qué somos mucho más que un simple restaurante de comida; somos una experiencia gastronómica inolvidable. ¡Te esperamos con los brazos abiertos para llevar tu paladar a un viaje de sabores inolvidable!</p>
+  <div class="card mx-auto carta" style="max-width: 800px;">
+    <div class="card-body">
+      <center><h2 class="card-title" style="font-family: 'Segoe Script', cursive; font-size: 30px;">Sobre Nosotros</h2></center>
+      <center><img src="img/logo_fondo.png" class="img" alt="imagen principal" width="300" height="300" /></center>
+      <p class="card-text" style="font-family: 'Garamond', serif; font-size: 22px;">
+        ¡Bienvenidos a Rincon del Sabor! Somos una pasión culinaria hecha realidad, donde la frescura, la calidad y el sabor se unen para ofrecerte una experiencia gastronómica única.<br>
+        En Rincon del Sabor, nos enorgullecemos de servir platos inspirados en la cocina tradicional con un toque moderno. Cada uno de nuestros platos está cuidadosamente elaborado con ingredientes frescos y seleccionados con esmero para garantizar un sabor excepcional en cada bocado.<br>
+        Nuestro equipo está compuesto por apasionados de la gastronomía y amantes de la buena comida que trabajan arduamente para superar tus expectativas en cada visita. Nos esforzamos por crear un ambiente acogedor y amigable donde puedas disfrutar de una comida deliciosa en compañía de amigos y familiares.<br>
+        En Rincon del Sabor nos comprometemos a ofrecerte una experiencia culinaria memorable. Ya sea que estés buscando una comida rápida para llevar, una cena relajada o un banquete para celebrar una ocasión especial, estamos aquí para satisfacer tus deseos gastronómicos.<br>
+        ¡Gracias por elegirnos y permitirnos ser parte de tus momentos más sabrosos!<br>
+        ¡Te esperamos pronto en Rincon del Sabor!
+      </p>
+    </div>
   </div>
+  <br><br>
+  
   <!-- Bootstrap JS y dependencias -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>

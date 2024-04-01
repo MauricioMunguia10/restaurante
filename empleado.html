@@ -7,26 +7,28 @@
     <title>Inicion de sesion</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-0Xnwd1G25dNHpfjl9eJsg8gdJrb3pWc2r4gkk5guI9654E7Iiu3rv1peoX2L2gKB" crossorigin="anonymous"></script>
+    
     <style>
        
     </style>
 </head>
 
-<body>
+<body style=" background-color: #c3e4f9;">
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Logo</a>
+    <img src="img/logo.png" class="img" alt="imagen principal" width="80" />
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
     </button>
   
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="inicio.html">Inicio <span class="sr-only">(current)</span></a>
+        <li class="nav-item ">
+          <a class="nav-link" href="inicio.html">Inicio </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="empleado.html">Empleados</a>
+        <li class="nav-item active">
+          <a class="nav-link" href="empleado.html">Empleados <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="orden.html">Orden de venta</a>
@@ -35,43 +37,110 @@
           <a class="nav-link" href="menu.html">Menus</a>
         </li>
       </ul>
-      <div class="form-inline my-2 my-lg-0">
+      <div class="form-inline my-2 my-lg-0 mr-auto">
         <span class="navbar-text" id="txt_usuario">
           Usuario:
         </span>
       </div>
-      <button class="btn btn-outline-danger my-2 my-sm-0 " type="submit" id="btn_cerrar_sesion">Cerrar sesion</button>
+      <div class="form-inline ml-auto">
+        <button class="btn btn-outline-danger my-2 my-sm-0 mr-2 " type="submit" id="btn_cerrar_sesion">Cerrar sesion</button>
+      </div>
+      
     </div>
   </nav>
+  <center> <em><p style="font-family: 'Garamond', serif; font-size: 22px;"><h1>Empleados</h1></p>
+    <div class="empleados">
 
-    <div class="container">
-        <h1>Ingresa los Datos</h1>
-        
-        <form name="datos" method="post">
-          <input type="text" id="txt_nom" placeholder="Nombre"><br><br>
-          <input type="text" id="txt_pape" placeholder="Apellido Paterno"><br><br>
-          <input type="text" id="txt_sape" placeholder="Apellido Materno"><br><br>
-          <input type="text" id="txt_tel" placeholder="Telefono" maxlength="10"><br><br>
-          <input type="text" id="txt_email" placeholder="Email"><br><br>
-          <input type="text" id="txt_direccion" placeholder="Direccion"><br><br>
-          <input type="text" id="txt_puesto" placeholder="Puesto"><br><br>
-          Selecciona un rol:<br>
-          <select name="rol" id="combo">
-              <option value="1">Empleado</option>
-              <option value="2">Jefe</option>
-          </select>
-          <br><br>
-  
-          <input type="text" id="txt_sal" placeholder="Salario"><br><br>
-          <input type="button" value="Guardar" id="btn_guardar"><br><br>
-
-        </form>
     </div>
-  <script src="index.js"></script>
+  <center> <em><p style="font-family: 'Garamond', serif; font-size: 22px;"><h1>Registrar</h1></p>
+    <div class="container">
+      <form>
+        <div class="row">
+          <div class="col">
+            
+            <label for="txt_tel" class="form-label">Nombre</label>
+            <input type="text" class="form-control" placeholder="Nombre" id="txt_nom">
+          </div>
+          <div class="col">
+            <label for="txt_tel" class="form-label">Apellido Paterno</label>
+            <input type="text" class="form-control" placeholder="Apellido Paterno" id="txt_pape">
+          </div>
+          <div class="col">
+            <label for="txt_tel" class="form-label">Apellido Materno</label>
+            <input type="text" class="form-control" placeholder="Apellido Materno" id="txt_sape">
+          </div>
+        </div>
+      </form>
+      
+      <div class="row justify-content-center">
+        <div class="mb-3 col-md-3">
+          <label for="txt_tel" class="form-label">Teléfono</label>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
+          </svg>
+          <input type="tel" class="form-control" id="txt_tel" placeholder="Teléfono" maxlength="10">
+        </div>
+        <div class="mb-3 col-md-6">
+          <label for="txt_email" class="form-label">Email</label>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-at-fill" viewBox="0 0 16 16">
+            <path d="M2 2A2 2 0 0 0 .05 3.555L8 8.414l7.95-4.859A2 2 0 0 0 14 2zm-2 9.8V4.698l5.803 3.546zm6.761-2.97-6.57 4.026A2 2 0 0 0 2 14h6.256A4.5 4.5 0 0 1 8 12.5a4.49 4.49 0 0 1 1.606-3.446l-.367-.225L8 9.586zM16 9.671V4.697l-5.803 3.546.338.208A4.5 4.5 0 0 1 12.5 8c1.414 0 2.675.652 3.5 1.671"/>
+            <path d="M15.834 12.244c0 1.168-.577 2.025-1.587 2.025-.503 0-1.002-.228-1.12-.648h-.043c-.118.416-.543.643-1.015.643-.77 0-1.259-.542-1.259-1.434v-.529c0-.844.481-1.4 1.26-1.4.585 0 .87.333.953.63h.03v-.568h.905v2.19c0 .272.18.42.411.42.315 0 .639-.415.639-1.39v-.118c0-1.277-.95-2.326-2.484-2.326h-.04c-1.582 0-2.64 1.067-2.64 2.724v.157c0 1.867 1.237 2.654 2.57 2.654h.045c.507 0 .935-.07 1.18-.18v.731c-.219.1-.643.175-1.237.175h-.044C10.438 16 9 14.82 9 12.646v-.214C9 10.36 10.421 9 12.485 9h.035c2.12 0 3.314 1.43 3.314 3.034zm-4.04.21v.227c0 .586.227.8.581.8.31 0 .564-.17.564-.743v-.367c0-.516-.275-.708-.572-.708-.346 0-.573.245-.573.791"/>
+          </svg>
+          <input type="email" class="form-control" id="txt_email" placeholder="Email">
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="mb-3 col-md-7">
+          <label for="txt_direccion" class="form-label">Dirección</label>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
+          </svg>
+          <input type="text" class="form-control" id="txt_direccion" placeholder="Dirección">
+        </div>
+        <div class="mb-3 col-md-4">
+          <label for="txt_puesto" class="form-label">Puesto</label>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+          </svg>
+          <input type="text" class="form-control" id="txt_puesto" placeholder="Puesto">
+        </div>
+      </div>
+      <div class="row">
+        <div class="mb-3 col-md-6">
+          <label for="combo" class="form-label">Selecciona un rol</label>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-bounding-box" viewBox="0 0 16 16">
+            <path d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5M.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5m15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5"/>
+            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+          </svg>
+          <select class="form-select" id="combo" name="rol">
+            <option value="1">Empleado</option>
+            <option value="2">Jefe</option>
+          </select>
+        </div>
+        <div class="mb-3 col-md-5">
+          <label for="txt_sal" class="form-label">Salario</label>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-coin" viewBox="0 0 16 16">
+            <path d="M5.5 9.511c.076.954.83 1.697 2.182 1.785V12h.6v-.709c1.4-.098 2.218-.846 2.218-1.932 0-.987-.626-1.496-1.745-1.76l-.473-.112V5.57c.6.068.982.396 1.074.85h1.052c-.076-.919-.864-1.638-2.126-1.716V4h-.6v.719c-1.195.117-2.01.836-2.01 1.853 0 .9.606 1.472 1.613 1.707l.397.098v2.034c-.615-.093-1.022-.43-1.114-.9zm2.177-2.166c-.59-.137-.91-.416-.91-.836 0-.47.345-.822.915-.925v1.76h-.005zm.692 1.193c.717.166 1.048.435 1.048.91 0 .542-.412.914-1.135.982V8.518z"/>
+            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+            <path d="M8 13.5a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11m0 .5A6 6 0 1 0 8 2a6 6 0 0 0 0 12"/>
+          </svg>
+          <input type="text" class="form-control" id="txt_sal" placeholder="Salario">
+        </div>
+      </div>
+      
+      <button type="button" class="btn btn-primary" id="btn_guardar" style="width: 200px;">Guardar</button>
+    </form>
+    </div>
+    
+    </center>
+    </form>
+</div>  
+  
   <!-- Bootstrap JS y dependencias -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="index.js"></script>
 </body>
 
 </html>

@@ -43,12 +43,29 @@ insert into cliente values("",1,"Rodrigo Garcia");
 
 create table comida(
     id int not null auto_increment primary key,
+    categoria varchar(20),
     nombre varchar(20),
     cantidad varchar(20),
     precio int
 );
 
-insert into comida values ("","pozole","450 gr", 78);
+insert into comida values ("","Desayuno","Chilaquiles","500 gr", 60);
+insert into comida values ("","Desayuno","Huevos al Gusto","450 gr", 55);
+insert into comida values ("","Desayuno","Pan dulce","450 gr", 70);
+insert into comida values ("","Desayuno","Sincronizadas","450 gr", 50);
+insert into comida values ("","Desayuno","Wafles","450 gr", 60);
+
+insert into comida values ("","Comida","Pozole","450 gr", 90);
+insert into comida values ("","Comida","Milanesa","450 gr", 100);
+insert into comida values ("","Comida","Tacos","450 gr", 80);
+insert into comida values ("","Comida","Mole","450 gr", 120);
+insert into comida values ("","Comida","Chile","450 gr", 110);
+
+insert into comida values ("","Bebida","Limonada","450 ml", 40);
+insert into comida values ("","Bebida","Cafe","250 ml", 20);
+insert into comida values ("","Bebida","Refresco","500 ml", 35);
+insert into comida values ("","Bebida","Cerveza","355 ml", 70);
+insert into comida values ("","Bebida","Agua","500 ml", 10);
 
 create table orden(
     id int not null auto_increment primary key,
