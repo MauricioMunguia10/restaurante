@@ -4,6 +4,7 @@ let correo,contrasena;
 let url;
 let sesion;
 let nombre,p_apellido,s_apellido,telefono,email,direccion,puesto,rol,salario;
+let empleados, arr_empleado;
 
 //identifica el navegador
 addEvent(window,'load',cargar, false);
@@ -162,13 +163,93 @@ function xmlhttprequest(){
 }
 
 //empleados
-//registro empleados
 //funcion principal
 function cargarEmpleado(){      
     addEvent(document.getElementById("btn_guardar"),"click",verificaCampos,false);
+    empleados = document.getElementById("tbl_empleados");
     buscaSesion();
+    buscaEmpleado();
     
 }
+//Crea tabla empleados
+function buscaEmpleado(){
+    conexion = xmlhttprequest();
+    conexion.onreadystatechange = esperaEmpleados;
+    conexion.open("POST","php/empleados.php",true);   
+    conexion.setRequestHeader("Content-type","application/x-www-form-urlencoded");  
+    conexion.send();
+}
+function esperaEmpleados(){ 
+    if(conexion.readyState == 4){
+        arr_empleado=eval(conexion.responseText);
+        //alert(arr_empleado[0]["tam"]);
+        crearTabla();
+        buscaSesion();
+    }
+}  
+function crearTabla(){ 
+    let fragment1=document.createDocumentFragment();
+    let fragment2=document.createDocumentFragment();
+    //Crea las filas
+    for(let i=1;i<=arr_empleado[0]["tam"];i++){
+        let fila=document.createElement('tr');
+        fila.setAttribute('id',"fila"+i);
+        fila.setAttribute('scope',"row");
+        fila.textContent="" ;
+        fragment1.appendChild(fila);
+        
+    }
+    empleados.appendChild(fragment1);
+    //Crea las columnas
+    //alert(arr_empleado[0]["tam"]);
+    for(let i=1;i<=arr_empleado[0]["tam"];i++){
+        fila= document.getElementById("fila"+i);
+        let columna1=document.createElement('td');
+        let columna2=document.createElement('td');
+        let columna3=document.createElement('td');
+        let columna4=document.createElement('td');
+        let columna5=document.createElement('td');
+        let columna6=document.createElement('td');
+        let columna7=document.createElement('td');
+        let columna8=document.createElement('td');
+        let columna9=document.createElement('td');
+        let columna10=document.createElement('td');
+        columna1.setAttribute('scope',"col");
+        columna2.setAttribute('scope',"col");
+        columna3.setAttribute('scope',"col");
+        columna4.setAttribute('scope',"col");
+        columna5.setAttribute('scope',"col");
+        columna6.setAttribute('scope',"col");
+        columna7.setAttribute('scope',"col");
+        columna8.setAttribute('scope',"col");
+        columna9.setAttribute('scope',"col");
+        columna10.setAttribute('scope',"col");
+        columna1.textContent=arr_empleado[0]["id"+i]+"  ";
+        columna2.textContent=arr_empleado[0]["nombre"+i]+" ";
+        columna3.textContent=arr_empleado[0]["p_apellido"+i]+" ";
+        columna4.textContent=arr_empleado[0]["s_apellido"+i]+" ";
+        columna5.textContent=arr_empleado[0]["telefono"+i]+" ";
+        columna6.textContent=arr_empleado[0]["email"+i]+" ";
+        columna7.textContent=arr_empleado[0]["direccion"+i]+" ";
+        columna8.textContent=arr_empleado[0]["puesto"+i]+" ";
+        columna9.textContent=arr_empleado[0]["rol"+i]+" ";
+        columna10.textContent=arr_empleado[0]["salario"+i]+" ";
+        fragment2.appendChild(columna1);
+        fragment2.appendChild(columna2);
+        fragment2.appendChild(columna3);
+        fragment2.appendChild(columna4);
+        fragment2.appendChild(columna5);
+        fragment2.appendChild(columna6);
+        fragment2.appendChild(columna7);
+        fragment2.appendChild(columna8);
+        fragment2.appendChild(columna9);
+        fragment2.appendChild(columna10);
+        fila.appendChild(fragment2);
+    }
+
+}
+
+//registro empleados
 function datosEmpleado(){
     nombre=document.getElementById("txt_nom").value;
     p_apellido=document.getElementById("txt_pape").value;
@@ -203,9 +284,14 @@ function guardarEmpleado(){
 function esperaGuardar(){
     count++;
     if(conexion.readyState==4){
-        alert(conexion.responseText);  
+        //alert(conexion.responseText);  
         count=0;
+        destruir();
+        buscaEmpleado();
     }
+}
+function destruir(){
+    document.getElementById("tbl_empleados").innerHTML = '<tbody id="tbl_empleados"></tbody>';
 }
 
 //MMG
