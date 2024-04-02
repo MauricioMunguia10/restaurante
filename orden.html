@@ -1,81 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap CSS -->
+  <link rel="icon" href="img/logo_simple.png" >
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <title> Rincon del Sabor </title>
 </head>
 <body>
     
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Logo</a>
+    <img src="img/logo_simple_fondo.png" class="img" alt="imagen principal" width="80" />
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
     </button>
   
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="inicio.html">Inicio <span class="sr-only">(current)</span></a>
+        <li class="nav-item ">
+          <a class="nav-link" href="inicio.html">Inicio </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="empleado.html">Empleados</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="orden.html">Orden de venta</a>
+        <li class="nav-item active">
+          <a class="nav-link" href="orden.html">Orden de venta <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="menu.html">Menus</a>
         </li>
       </ul>
-      <div class="form-inline my-2 my-lg-0">
+      <div class="form-inline my-2 my-lg-0 mr-auto">
         <span class="navbar-text" id="txt_usuario">
           Usuario:
         </span>
       </div>
-      <button class="btn btn-outline-danger my-2 my-sm-0 " type="submit" id="btn_cerrar_sesion">Cerrar sesion</button>
+      <div class="form-inline ml-auto">
+        <button class="btn btn-outline-danger my-2 my-sm-0 " type="submit" id="btn_cerrar_sesion">Cerrar sesion</button>
+      </div>
+      
     </div>
-  </nav>
-    <h1>Orden de venta</h1>
-    <select name="restaurantes" id="combo_restaurantes">
-        <option value="1">Atizapan</option>
-        <option value="2">Nicolas Romero</option>
-        <option value="3">Tlalnepantla</option>
-    </select><br>
-    <input type="text" id="txt_id" placeholder="Id"><br>
-    <input type="text" id="txt_name" placeholder="Nombre"><br>
-    <input type="text" id="txt_puesto" placeholder="Puesto"><br>
-    <select name="comida" id="combo_comida">
-        <option value="1">Desayunos</option>
-        <option value="2">Platillos</option>
-        <option value="3">Bebidas</option>
-        <option value="4">Postres</option>
-    </select>
-    <div class="selecciona">
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">Pozole</label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">Sopa</label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">Arroz</label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">Pasta</label>
-        </div>
+  </nav><br>
+  <h2 class="text-center">Agregar cliente</h2>
+  <div class="container">
+    <div class="row align-items-stretch ">
+      
+      <div class="col-md-4">
+        <input type="text" class="form-control mr-2" id="txt_nombre_cliente" placeholder="Nombre Cliente">
+      </div>
+        
+      <div class="col-md-4">
+        <input type="text" class="form-control mr-2" id="txt_mesa" placeholder="Mesa">
+      </div>
+
+      <div class="col-md-4">
+        <button type="button" class="btn btn-success " id="btn_registrar_cliente">Registrar</button>
+      </div>
           
+      
+  
     </div>
-    <input type="text" id="txt_total" placeholder="Total"><br>
-    <script src="index.js"></script>
-    <!-- Bootstrap JS y dependencias -->
+  </div>
+  <h2 class="text-center">Orden de venta</h2>
+  <div class="container">
+    <div class="row align-items-stretch ">
+      <div class="col-md-3">
+        <select class="form-select mr-2" id="sucursalSelect">
+          <option selected>Selecciona Sucursal</option>
+          <option value="1">Nicolas Romero</option>
+          <option value="2">Atizapan</option>
+          <option value="3">Tlalnepantla</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <input type="text" class="form-control mr-2" id="txt_id" placeholder="Id Empleado">
+      </div>
+        
+      <div class="col-md-3">
+        <input type="text" class="form-control mr-2" id="txt_name" placeholder="Nombre Cliente">
+      </div>
+          
+      <div class="col-md-3">
+        <input type="text" class="form-control mr-2" id="txt_mesa_dos" placeholder="Mesa">
+      </div>
+  
+    </div>
+  </div>
+  <br><br>
+  <div class="row mr-auto ml-auto">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Desayuno</h5>
+          <!-- Aquí puedes agregar los elementos de tu menú de comida -->
+          <ul class="list-group list-group-flush" id="desayuno">
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title ">Comida</h5>
+          <!-- Aquí puedes agregar los elementos de tu menú de comida -->
+          <ul class="list-group list-group-flush" id="comida">
+           
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Bebida</h5>
+          <!-- Aquí puedes agregar los elementos de tu menú de comida -->
+          <ul class="list-group list-group-flush" id="bebidas">
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br><br>
+  <div class="text-center">
+    <button type="button" class="btn btn-success btn-lg mx-auto" style="width: 200px;">Generar Orden</button>
+  </div>
+  <br>
+
+  
+
+
+    
+   
+    
+  <script src="index.js"></script>
+  <!-- Bootstrap JS y dependencias -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

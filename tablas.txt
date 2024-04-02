@@ -70,9 +70,9 @@ insert into comida values ("","Bebida","Agua","500 ml", 10);
 create table orden(
     id int not null auto_increment primary key,
     cliente_id int,
-    comida_id int,
+    comida_nombre varchar(50),
     foreign key(cliente_id) references cliente(id),
-    foreign key(comida_id) references comida(id),
+    foreign key(comida_nombre) references comida(nombre),
     total int
 );
 

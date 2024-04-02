@@ -5,6 +5,8 @@ let url;
 let sesion;
 let nombre,p_apellido,s_apellido,telefono,email,direccion,puesto,rol,salario;
 let empleados, arr_empleado;
+let arr_comida, desayuno, comida, bebidas;
+let j=1,k=1,l=1;
 
 //identifica el navegador
 addEvent(window,'load',cargar, false);
@@ -294,4 +296,122 @@ function destruir(){
     document.getElementById("tbl_empleados").innerHTML = '<tbody id="tbl_empleados"></tbody>';
 }
 
-//MMG
+//orden
+function cargarOrden(){
+    creaMenu();
+    desayuno = document.getElementById("desayuno");
+    comida = document.getElementById("comida");
+    bebidas = document.getElementById("bebidas");
+    addEvent(document.getElementById("btn_registrar_cliente"),'click',registrarCliente,false);
+}
+function registrarCliente(){
+    let nombre_cliente = document.getElementById("txt_nombre_cliente").value;
+    let mesa = document.getElementById("txt_mesa").value;
+    conexion = xmlhttprequest();
+    conexion.onreadystatechange = esperaCliente;
+    conexion.open("POST","php/cliente.php",true);   
+    conexion.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    if(nombre_cliente=="" || mesa==""){
+        alert("datos incompletos");
+    } else{
+        conexion.send("v1="+nombre_cliente+"&v2="+mesa);
+        document.getElementById("txt_name").value =nombre_cliente;
+        document.getElementById("txt_mesa_dos").value =mesa;
+    }
+    
+}
+function esperaCliente(){ 
+    if(conexion.readyState == 4){
+        //alert(conexion.responseText);
+        
+    }
+}
+function creaMenu(){
+    conexion = xmlhttprequest();
+    conexion.onreadystatechange = esperaOrden;
+    conexion.open("POST","php/comida.php",true);   
+    conexion.setRequestHeader("Content-type","application/x-www-form-urlencoded");  
+    conexion.send();
+}
+function esperaOrden(){ 
+    if(conexion.readyState == 4){
+        //alert(conexion.responseText);
+        arr_comida=eval(conexion.responseText);
+        
+        crearTarjetas();
+        buscaSesion();
+    }
+}
+function crearTarjetas(){
+    //alert("entra");
+    let fragment1=document.createDocumentFragment();
+    let fragment2=document.createDocumentFragment();
+    let fragment3=document.createDocumentFragment();
+    
+    for(let i=0;i<=arr_comida[0]["tam"];i++){
+        let categoria = arr_comida[0]["categoria"+i];
+        if(categoria=="Desayuno"){
+            
+            let li = document.createElement('li');
+            let label =  document.createElement('label');
+            let input =  document.createElement('input');
+            let span = document.createElement('span');
+            input.setAttribute("id","desayuno"+j);
+            input.setAttribute("type","checkbox");
+            input.setAttribute("value",j);
+            label.setAttribute("for","desayuno"+j);
+            label.textContent = arr_comida[0]["nombre"+i];
+            span.setAttribute("class","badge badge-primary");
+            span.textContent ="$"+ arr_comida[0]["precio"+i]
+            li.setAttribute("class","list-group-item d-flex justify-content-between align-items-center");
+            li.appendChild(input);
+            li.appendChild(label);
+            li.appendChild(span);
+            fragment1.appendChild(li);
+            desayuno.appendChild(fragment1);
+            j++;
+        }
+        if(categoria=="Comida"){
+            let li = document.createElement('li');
+            let label =  document.createElement('label');
+            let input =  document.createElement('input');
+            let span = document.createElement('span');
+            input.setAttribute("id","comida"+k);
+            input.setAttribute("type","checkbox");
+            input.setAttribute("value",k);
+            label.setAttribute("for","comida"+k);
+            label.textContent = arr_comida[0]["nombre"+i];
+            span.setAttribute("class","badge badge-primary");
+            span.textContent ="$"+ arr_comida[0]["precio"+i]
+            li.setAttribute("class","list-group-item d-flex justify-content-between align-items-center");
+            li.appendChild(input);
+            li.appendChild(label);
+            li.appendChild(span);
+            fragment2.appendChild(li);
+            comida.appendChild(fragment2);
+            k++;
+        }
+        if(categoria=="Bebida"){
+            let li = document.createElement('li');
+            let label =  document.createElement('label');
+            let input =  document.createElement('input');
+            let span = document.createElement('span');
+            input.setAttribute("id","desayuno"+j);
+            input.setAttribute("type","checkbox");
+            input.setAttribute("value",l);
+            label.setAttribute("for","bebida"+l);
+            label.textContent = arr_comida[0]["nombre"+i];
+            span.setAttribute("class","badge badge-primary");
+            span.textContent ="$"+ arr_comida[0]["precio"+i]
+            li.setAttribute("class","list-group-item d-flex justify-content-between align-items-center");
+            li.appendChild(input);
+            li.appendChild(label);
+            li.appendChild(span);
+            fragment3.appendChild(li);
+            bebidas.appendChild(fragment3);
+            j++;
+        }
+        
+        
+    }
+}
