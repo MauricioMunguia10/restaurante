@@ -8,15 +8,15 @@ create table sesiones(
     rol int not null default 0
 ); 
 
-insert into sesiones values("","mauricio@gmail.com","1234",1);
-insert into sesiones values("","munguia@gmail.com","1234","");
+insert into sesiones values("0","mauricio@gmail.com","1234",1);
+insert into sesiones values("0","munguia@gmail.com","1234","");
 
 create table empleado(
     id int not null auto_increment primary key,
     nombre varchar(30),
     p_apellido varchar(30),
     s_apellido varchar(30),
-    telefono int,
+    telefono bigint,
     email varchar(20),
     direccion varchar(30),
     puesto varchar(20),
@@ -24,7 +24,7 @@ create table empleado(
     salario int
 );
 
-insert into empleado values("","Mauricio","Munguia","Garcia",5517287218,"mau@gmail.com","casa","mesero",0,2500);
+insert into empleado values("0","Mauricio","Munguia","Garcia",5517287218,"mau@gmail.com","casa","mesero",0,2500);
 
 create table sucursal(
     id int not null auto_increment primary key,
@@ -36,10 +36,10 @@ insert into sucursal values("","Nicolas Romero");
 create table cliente(
     id int not null auto_increment primary key,
     mesa int,
-    nombre varchar(30)
+    nombre varchar(30) 
 );
 
-insert into cliente values("",1,"Rodrigo Garcia");
+insert into cliente values("0",1,"Rodrigo Garcia");
 
 create table comida(
     id int not null auto_increment primary key,
@@ -49,31 +49,35 @@ create table comida(
     precio int
 );
 
-insert into comida values ("","Desayuno","Chilaquiles","500 gr", 60);
-insert into comida values ("","Desayuno","Huevos al Gusto","450 gr", 55);
-insert into comida values ("","Desayuno","Pan dulce","450 gr", 70);
-insert into comida values ("","Desayuno","Sincronizadas","450 gr", 50);
-insert into comida values ("","Desayuno","Wafles","450 gr", 60);
+insert into comida values ("0","Desayuno","Chilaquiles","500 gr", 60);
+insert into comida values ("0","Desayuno","Huevos al Gusto","450 gr", 55);
+insert into comida values ("0","Desayuno","Pan dulce","450 gr", 70);
+insert into comida values ("0","Desayuno","Sincronizadas","450 gr", 50);
+insert into comida values ("0","Desayuno","Wafles","450 gr", 60);
 
-insert into comida values ("","Comida","Pozole","450 gr", 90);
-insert into comida values ("","Comida","Milanesa","450 gr", 100);
-insert into comida values ("","Comida","Tacos","450 gr", 80);
-insert into comida values ("","Comida","Mole","450 gr", 120);
-insert into comida values ("","Comida","Chile","450 gr", 110);
+insert into comida values ("0","Comida","Pozole","450 gr", 90);
+insert into comida values ("0","Comida","Milanesa","450 gr", 100);
+insert into comida values ("0","Comida","Tacos","450 gr", 80);
+insert into comida values ("0","Comida","Mole","450 gr", 120);
+insert into comida values ("0","Comida","Chile","450 gr", 110);
 
-insert into comida values ("","Bebida","Limonada","450 ml", 40);
-insert into comida values ("","Bebida","Cafe","250 ml", 20);
-insert into comida values ("","Bebida","Refresco","500 ml", 35);
-insert into comida values ("","Bebida","Cerveza","355 ml", 70);
-insert into comida values ("","Bebida","Agua","500 ml", 10);
+insert into comida values ("0","Bebida","Limonada","450 ml", 40);
+insert into comida values ("0","Bebida","Cafe","250 ml", 20);
+insert into comida values ("0","Bebida","Refresco","500 ml", 35);
+insert into comida values ("0","Bebida","Cerveza","355 ml", 70);
+insert into comida values ("0","Bebida","Agua","500 ml", 10);
 
 create table orden(
     id int not null auto_increment primary key,
     cliente_id int,
-    comida_nombre varchar(50),
+    comida_id int,
     foreign key(cliente_id) references cliente(id),
-    foreign key(comida_nombre) references comida(nombre),
+    foreign key(comida_id) references comida(id),
     total int
 );
 
-insert into orden values ("",1,1,178);
+insert into orden values ("0",1,1,178);
+
+
+SELECT c.id AS cliente_id, c.mesa, c.nombre, o.id AS orden_id, o.comida_id, o.total
+FROM cliente c INNER JOIN orden o ON c.id = o.cliente_id;

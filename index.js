@@ -7,6 +7,7 @@ let nombre,p_apellido,s_apellido,telefono,email,direccion,puesto,rol,salario;
 let empleados, arr_empleado;
 let arr_comida, desayuno, comida, bebidas;
 let j=1,k=1,l=1;
+let m,n=5;
 
 //identifica el navegador
 addEvent(window,'load',cargar, false);
@@ -214,7 +215,7 @@ function crearTabla(){
         let columna6=document.createElement('td');
         let columna7=document.createElement('td');
         let columna8=document.createElement('td');
-        let columna9=document.createElement('td');
+        
         let columna10=document.createElement('td');
         columna1.setAttribute('scope',"col");
         columna2.setAttribute('scope',"col");
@@ -224,7 +225,7 @@ function crearTabla(){
         columna6.setAttribute('scope',"col");
         columna7.setAttribute('scope',"col");
         columna8.setAttribute('scope',"col");
-        columna9.setAttribute('scope',"col");
+       
         columna10.setAttribute('scope',"col");
         columna1.textContent=arr_empleado[0]["id"+i]+"  ";
         columna2.textContent=arr_empleado[0]["nombre"+i]+" ";
@@ -234,7 +235,7 @@ function crearTabla(){
         columna6.textContent=arr_empleado[0]["email"+i]+" ";
         columna7.textContent=arr_empleado[0]["direccion"+i]+" ";
         columna8.textContent=arr_empleado[0]["puesto"+i]+" ";
-        columna9.textContent=arr_empleado[0]["rol"+i]+" ";
+        
         columna10.textContent=arr_empleado[0]["salario"+i]+" ";
         fragment2.appendChild(columna1);
         fragment2.appendChild(columna2);
@@ -244,7 +245,7 @@ function crearTabla(){
         fragment2.appendChild(columna6);
         fragment2.appendChild(columna7);
         fragment2.appendChild(columna8);
-        fragment2.appendChild(columna9);
+       
         fragment2.appendChild(columna10);
         fila.appendChild(fragment2);
     }
@@ -303,6 +304,33 @@ function cargarOrden(){
     comida = document.getElementById("comida");
     bebidas = document.getElementById("bebidas");
     addEvent(document.getElementById("btn_registrar_cliente"),'click',registrarCliente,false);
+    addEvent(document.getElementById("btn_generar_orden"),'click',generaOrden,false);
+}
+function generaOrden() {
+    let arr_comida_pedir=document.getElementsByTagName("input");
+    let m = j + k + l + 5;
+    let i = 0;
+    while (i <= m && i < arr_comida_pedir.length) {
+        if (arr_comida_pedir[i].checked) {
+            n = arr_comida_pedir[i].value;
+            enviaOrden();
+        }
+        i++;
+    }
+}
+function enviaOrden(){
+    conexion = xmlhttprequest();
+    conexion.onreadystatechange = guardaOrden;
+    conexion.open("POST","php/orden.php",true);   
+    conexion.setRequestHeader("Content-type","application/x-www-form-urlencoded");  
+    conexion.send("v1=" + n);
+}
+
+function guardaOrden() {
+    if (conexion.readyState == 4) {
+        // Tu código para manejar la respuesta de la solicitud
+        alert("orden generada")
+    }
 }
 function registrarCliente(){
     let nombre_cliente = document.getElementById("txt_nombre_cliente").value;
@@ -358,8 +386,9 @@ function crearTarjetas(){
             let span = document.createElement('span');
             input.setAttribute("id","desayuno"+j);
             input.setAttribute("type","checkbox");
-            input.setAttribute("value",j);
+            input.setAttribute("value",arr_comida[0]["nombre"+i]);
             label.setAttribute("for","desayuno"+j);
+            label.setAttribute("id","desayuno_l"+j);
             label.textContent = arr_comida[0]["nombre"+i];
             span.setAttribute("class","badge badge-primary");
             span.textContent ="$"+ arr_comida[0]["precio"+i]
@@ -378,8 +407,9 @@ function crearTarjetas(){
             let span = document.createElement('span');
             input.setAttribute("id","comida"+k);
             input.setAttribute("type","checkbox");
-            input.setAttribute("value",k);
+            input.setAttribute("value",arr_comida[0]["nombre"+i]);
             label.setAttribute("for","comida"+k);
+            label.setAttribute("id","comida_l"+k);
             label.textContent = arr_comida[0]["nombre"+i];
             span.setAttribute("class","badge badge-primary");
             span.textContent ="$"+ arr_comida[0]["precio"+i]
@@ -398,8 +428,9 @@ function crearTarjetas(){
             let span = document.createElement('span');
             input.setAttribute("id","desayuno"+j);
             input.setAttribute("type","checkbox");
-            input.setAttribute("value",l);
+            input.setAttribute("value",arr_comida[0]["nombre"+i]);
             label.setAttribute("for","bebida"+l);
+            label.setAttribute("id","bebida_l"+l);
             label.textContent = arr_comida[0]["nombre"+i];
             span.setAttribute("class","badge badge-primary");
             span.textContent ="$"+ arr_comida[0]["precio"+i]
@@ -409,7 +440,7 @@ function crearTarjetas(){
             li.appendChild(span);
             fragment3.appendChild(li);
             bebidas.appendChild(fragment3);
-            j++;
+            l++;
         }
         
         

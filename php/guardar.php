@@ -16,7 +16,7 @@ require('conexion.php');
 
 if(! $cn->connect_errno ) {
    // echo $direccion;  
-    $insertar=$cn->query("insert into empleado values('','".$nombre."','".$p_apellido."','".$s_apellido."','".$telefono."','".$email."','".$direccion."','".$puesto."','".$rol."','".$salario."')"); 
+    $insertar=$cn->query("insert into empleado values('0','".$nombre."','".$p_apellido."','".$s_apellido."','".$telefono."','".$email."','".$direccion."','".$puesto."','".$rol."','".$salario."')"); 
 
 
     //Si la consulta se ejecuto correctamente $insertar vale 1     

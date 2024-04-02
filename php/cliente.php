@@ -10,7 +10,7 @@ $consulta = $cn->query("SELECT * FROM cliente");
 if($consulta==1){
     
     if(! $cn->connect_errno ) {
-        $insertar=$cn->query("insert into cliente values('','".$mesa."','".$nombre."')"); 
+        $insertar=$cn->query("insert into cliente values('0','".$mesa."','".$nombre."')"); 
         
         //Si la consulta se ejecuto correctamente $insertar vale 1     
         if($insertar==1){          

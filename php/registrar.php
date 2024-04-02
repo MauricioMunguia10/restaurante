@@ -28,13 +28,13 @@ if($consulta==1){
 }
 if($email && $pswd){
     if(! $cn->connect_errno ) {
-        $insertar=$cn->query("insert into sesiones values('','".$correo."','".$contrasena."','')"); 
+        $insertar=$cn->query("insert into sesiones values('0','".$correo."','".$contrasena."','0')"); 
         
         //Si la consulta se ejecuto correctamente $insertar vale 1     
         if($insertar==1){          
-        //echo("El registro se guardo  correctamente=".!$cn->connect_errno. "Insertar =". $insertar); 
+        echo("El registro se guardo  correctamente=".!$cn->connect_errno. "Insertar =". $insertar); 
         }else{
-        //echo("No se guardo el registro".$cn->error."insertar=".$insertar); //$insertar no devuielve ningun valor cuando falla la consulta
+        echo("No se guardo el registro".$cn->error."insertar=".$insertar); //$insertar no devuielve ningun valor cuando falla la consulta
         }
         $cn->close();
         
