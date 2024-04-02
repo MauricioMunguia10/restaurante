@@ -6,8 +6,11 @@ let sesion;
 let nombre,p_apellido,s_apellido,telefono,email,direccion,puesto,rol,salario;
 let empleados, arr_empleado;
 let arr_comida, desayuno, comida, bebidas;
-let j=1,k=1,l=1;
+let j=1,k=1,l=1,total;
 let m,n=5;
+let id_cliente;
+let arr_orden, ordenes;
+let arr_total, clientes;
 
 //identifica el navegador
 addEvent(window,'load',cargar, false);
@@ -305,6 +308,17 @@ function cargarOrden(){
     bebidas = document.getElementById("bebidas");
     addEvent(document.getElementById("btn_registrar_cliente"),'click',registrarCliente,false);
     addEvent(document.getElementById("btn_generar_orden"),'click',generaOrden,false);
+    ordenes = document.getElementById("tbl_ordenes");
+    clientes = document.getElementById("tbl_clientes");
+    //creaTablas();
+    destruirTablas();
+    buscaOrden();
+    
+    buscaOrden();
+}
+function creaTablas(){
+    buscaOrden();
+    buscaTotal();
 }
 function generaOrden() {
     let arr_comida_pedir=document.getElementsByTagName("input");
@@ -323,13 +337,15 @@ function enviaOrden(){
     conexion.onreadystatechange = guardaOrden;
     conexion.open("POST","php/orden.php",true);   
     conexion.setRequestHeader("Content-type","application/x-www-form-urlencoded");  
-    conexion.send("v1=" + n);
+    conexion.send("v1=" + n+"&v2=" + id_cliente);
 }
 
 function guardaOrden() {
     if (conexion.readyState == 4) {
-        // Tu código para manejar la respuesta de la solicitud
-        alert("orden generada")
+        //alert(conexion.responseText);
+        
+        //alert("orden generada");
+        buscaOrden();
     }
 }
 function registrarCliente(){
@@ -342,6 +358,7 @@ function registrarCliente(){
     if(nombre_cliente=="" || mesa==""){
         alert("datos incompletos");
     } else{
+        //alert(nombre_cliente+""+mesa);
         conexion.send("v1="+nombre_cliente+"&v2="+mesa);
         document.getElementById("txt_name").value =nombre_cliente;
         document.getElementById("txt_mesa_dos").value =mesa;
@@ -351,10 +368,15 @@ function registrarCliente(){
 function esperaCliente(){ 
     if(conexion.readyState == 4){
         //alert(conexion.responseText);
+        id_cliente=conexion.responseText;
+        document.getElementById("txt_id").value =id_cliente;
+        //alert(id_cliente);
         
     }
 }
 function creaMenu(){
+    
+    //buscaTotal();
     conexion = xmlhttprequest();
     conexion.onreadystatechange = esperaOrden;
     conexion.open("POST","php/comida.php",true);   
@@ -368,7 +390,13 @@ function esperaOrden(){
         
         crearTarjetas();
         buscaSesion();
+        
     }
+}
+function destruirTablas(){
+    alert("entra");
+    document.getElementById("tbl_ordenes").innerHTML = '<tbody id="tbl_ordenes"></tbody>';
+    document.getElementById("tbl_clientes").innerHTML = '<tbody id="tbl_clientes"></tbody>';
 }
 function crearTarjetas(){
     //alert("entra");
@@ -445,4 +473,131 @@ function crearTarjetas(){
         
         
     }
+}
+
+//Crea tabla ordenes
+function buscaOrden(){
+    conexion = xmlhttprequest();
+    conexion.onreadystatechange = esperaOrdenes;
+    conexion.open("POST","php/mostrar_orden.php",true);   
+    conexion.setRequestHeader("Content-type","application/x-www-form-urlencoded");  
+    conexion.send();
+    //destruirTablas();
+}
+function esperaOrdenes(){ 
+    if(conexion.readyState == 4){
+        arr_orden=eval(conexion.responseText);
+        //alert(arr_orden[0]["tam"]);
+        //destruirTablas();
+        crearTablaOrden();
+        buscaTotal();
+        
+    }
+}  
+function crearTablaOrden(){ 
+    let fragment1=document.createDocumentFragment();
+    let fragment2=document.createDocumentFragment();
+    //Crea las filas
+    for(let i=1;i<=arr_orden[0]["tam"];i++){
+        let fila=document.createElement('tr');
+        fila.setAttribute('id',"fila"+i);
+        fila.setAttribute('scope',"row");
+        fila.textContent="" ;
+        fragment1.appendChild(fila);
+        
+    }
+    ordenes.appendChild(fragment1);
+    //Crea las columnas
+    //alert(arr_empleado[0]["tam"]);
+    for(let i=1;i<=arr_orden[0]["tam"];i++){
+        fila= document.getElementById("fila"+i);
+        let columna1=document.createElement('td');
+        let columna2=document.createElement('td');
+        let columna3=document.createElement('td');
+        let columna4=document.createElement('td');
+        let columna5=document.createElement('td');
+        let columna6=document.createElement('td');
+      
+        
+        let columna10=document.createElement('td');
+        columna1.setAttribute('scope',"col");
+        columna2.setAttribute('scope',"col");
+        columna3.setAttribute('scope',"col");
+        columna4.setAttribute('scope',"col");
+        columna5.setAttribute('scope',"col");
+        columna6.setAttribute('scope',"col");
+        
+        columna1.textContent=arr_orden[0]["orden_id"+i]+"  ";
+        columna2.textContent=arr_orden[0]["cliente_id"+i]+" ";
+        columna3.textContent=arr_orden[0]["mesa"+i]+" ";
+        columna4.textContent=arr_orden[0]["nombre"+i]+" ";
+        columna5.textContent=arr_orden[0]["comida_id"+i]+" ";
+        columna6.textContent=arr_orden[0]["total"+i]+" ";
+       
+        fragment2.appendChild(columna1);
+        fragment2.appendChild(columna2);
+        fragment2.appendChild(columna3);
+        fragment2.appendChild(columna4);
+        fragment2.appendChild(columna5);
+        fragment2.appendChild(columna6);
+ 
+        fila.appendChild(fragment2);
+    }
+
+}
+
+//Crea tabla clientes
+function buscaTotal(){
+    //7alert("entra")
+    conexion = xmlhttprequest();
+    conexion.onreadystatechange = esperaTotales;
+    conexion.open("POST","php/calcula_total.php",true);   
+    conexion.setRequestHeader("Content-type","application/x-www-form-urlencoded");  
+    conexion.send();
+}
+function esperaTotales(){ 
+    if(conexion.readyState == 4){
+        arr_total=eval(conexion.responseText);
+        //alert(arr_total[0]["tam"]);
+        crearTotales();
+        
+    }
+}  
+function crearTotales(){ 
+    let fragment1=document.createDocumentFragment();
+    let fragment2=document.createDocumentFragment();
+    //Crea las filas
+    for(let i=1;i<=arr_total[0]["tam"];i++){
+        let fila=document.createElement('tr');
+        fila.setAttribute('id',"fila"+i);
+        fila.setAttribute('scope',"row");
+        fila.textContent="" ;
+        fragment1.appendChild(fila);
+        
+    }
+    clientes.appendChild(fragment1);
+    //Crea las columnas
+    //alert(arr_empleado[0]["tam"]);
+    for(let i=1;i<=arr_total[0]["tam"];i++){
+        fila= document.getElementById("fila"+i);
+        let columna1=document.createElement('td');
+        let columna2=document.createElement('td');
+        let columna3=document.createElement('td');
+      
+        let columna10=document.createElement('td');
+        columna1.setAttribute('scope',"col");
+        columna2.setAttribute('scope',"col");
+        columna3.setAttribute('scope',"col");
+        
+        columna1.textContent=arr_total[0]["cliente_id"+i]+"  ";
+        columna2.textContent=arr_total[0]["nombre"+i]+" ";
+        columna3.textContent=arr_total[0]["total"+i]+" ";
+
+        fragment2.appendChild(columna1);
+        fragment2.appendChild(columna2);
+        fragment2.appendChild(columna3);
+
+        fila.appendChild(fragment2);
+    }
+
 }

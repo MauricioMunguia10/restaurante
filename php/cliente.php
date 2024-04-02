@@ -7,11 +7,15 @@ require('conexion.php');
 
 $consulta = $cn->query("SELECT * FROM cliente");
 
-if($consulta==1){
     
     if(! $cn->connect_errno ) {
         $insertar=$cn->query("insert into cliente values('0','".$mesa."','".$nombre."')"); 
-        
+        while($datos = $consulta->fetch_array()){
+            $id = $datos[0];
+            
+        }
+        $id+=1;
+        echo $id;
         //Si la consulta se ejecuto correctamente $insertar vale 1     
         if($insertar==1){          
         //echo("El registro se guardo  correctamente=".!$cn->connect_errno. "Insertar =". $insertar); 
@@ -27,7 +31,7 @@ if($consulta==1){
  
     
     
-}
+
 
 
 ?>

@@ -81,3 +81,5 @@ insert into orden values ("0",1,1,178);
 
 SELECT c.id AS cliente_id, c.mesa, c.nombre, o.id AS orden_id, o.comida_id, o.total
 FROM cliente c INNER JOIN orden o ON c.id = o.cliente_id;
+
+SELECT c.id AS cliente_id, c.nombre AS nombre_cliente, SUM(o.total) AS total_cliente FROM cliente c JOIN orden o ON c.id = o.cliente_id GROUP BY c.id, c.nombre;
