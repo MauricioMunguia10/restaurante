@@ -11,6 +11,7 @@ let m,n=5;
 let id_cliente;
 let arr_orden, ordenes;
 let arr_total, clientes;
+let arr_sucursal, sucursal;
 
 //identifica el navegador
 addEvent(window,'load',cargar, false);
@@ -310,11 +311,41 @@ function cargarOrden(){
     addEvent(document.getElementById("btn_generar_orden"),'click',generaOrden,false);
     ordenes = document.getElementById("tbl_ordenes");
     clientes = document.getElementById("tbl_clientes");
+    sucursal = document.getElementById("sucursalSelect");
     //creaTablas();
     destruirTablas();
     buscaOrden();
+    buscaSucursal();
     
-    buscaOrden();
+}
+function buscaSucursal(){
+    conexion = xmlhttprequest();
+    conexion.onreadystatechange = esperaSucursal;
+    conexion.open("POST","php/busca_sucursal.php",true);   
+    conexion.setRequestHeader("Content-type","application/x-www-form-urlencoded");  
+    conexion.send();
+    
+}
+function esperaSucursal(){ 
+    if(conexion.readyState == 4){
+        arr_sucursal=eval(conexion.responseText);
+        //alert(arr_sucursal[0]["id1"]);
+        agregaSucursales();
+        buscaOrden();
+    }
+}  
+function agregaSucursales(){
+    let fragment1=document.createDocumentFragment();
+    
+    //Crea las filas
+    for(let i=1;i<=arr_sucursal[0]["tam"];i++){
+        let option=document.createElement('option');
+        option.setAttribute('value',i);
+        option.textContent=arr_sucursal[0]["nombre"+i] ;
+        fragment1.appendChild(option);
+        
+    }
+    sucursal.appendChild(fragment1);
 }
 function creaTablas(){
     buscaOrden();

@@ -31,7 +31,7 @@ create table sucursal(
     nombre varchar(20)
 );
 
-insert into sucursal values("","Nicolas Romero");
+insert into sucursal values("0","Nicolas Romero");
 
 create table cliente(
     id int not null auto_increment primary key,
