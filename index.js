@@ -303,7 +303,7 @@ function destruir(){
 
 //orden
 function cargarOrden(){
-   
+    
     desayuno = document.getElementById("desayuno");
     comida = document.getElementById("comida");
     bebidas = document.getElementById("bebidas");
@@ -455,6 +455,7 @@ function registrarCliente(){
         conexion.send("v1="+nombre_cliente+"&v2="+mesa);
         document.getElementById("txt_name").value =nombre_cliente;
         document.getElementById("txt_mesa_dos").value =mesa;
+        
     }
     
 }
@@ -463,6 +464,7 @@ function esperaCliente(){
         //alert(conexion.responseText);
         id_cliente=conexion.responseText;
         document.getElementById("txt_id").value =id_cliente;
+        buscaSucursal();
         //alert(id_cliente);
         
     }
@@ -475,15 +477,17 @@ function creaMenu(){
     conexion.open("POST","php/comida.php",true);   
     conexion.setRequestHeader("Content-type","application/x-www-form-urlencoded");  
     conexion.send();
+   
 }
 function esperaOrden(){ 
     if(conexion.readyState == 4){
         //alert(conexion.responseText);
         arr_comida=eval(conexion.responseText);
-        alert("entra")
+        //alert("entra");
+        buscaSesion();
         crearTarjetas();
         buscaSesion();
-        buscaSucursal();
+        
         
     }
 }
