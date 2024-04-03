@@ -9,7 +9,11 @@ create table sesiones(
 ); 
 
 insert into sesiones values("0","mauricio@gmail.com","1234",1);
-insert into sesiones values("0","munguia@gmail.com","1234","");
+INSERT INTO sesiones VALUES ("0", "usuario1@gmail.com", "5678", "");
+INSERT INTO sesiones VALUES ("0", "usuario2@gmail.com", "91011", "");
+INSERT INTO sesiones VALUES ("0", "usuario3@gmail.com", "121314", "");
+INSERT INTO sesiones VALUES ("0", "usuario4@gmail.com", "151617", "");
+INSERT INTO sesiones VALUES ("0", "usuario5@gmail.com", "181920", "");
 
 create table empleado(
     id int not null auto_increment primary key,
@@ -25,6 +29,12 @@ create table empleado(
 );
 
 insert into empleado values("0","Mauricio","Munguia","Garcia",5517287218,"mau@gmail.com","casa","mesero",0,2500);
+INSERT INTO empleado VALUES ("0", "Juan", "López", "Martínez", 5512345678, "juan@example.com", "avenida 123", "cocinero", 0, 3000);
+INSERT INTO empleado VALUES ("0", "María", "González", "Sánchez", 5543219876, "maria@example.com", "calle 456", "camarero", 0, 2800);
+INSERT INTO empleado VALUES ("0", "Luis", "Hernández", "Rodríguez", 5578945612, "luis@example.com", "plaza 789", "repartidor", 0, 2700);
+INSERT INTO empleado VALUES ("0", "Ana", "Pérez", "López", 5587654321, "ana@example.com", "carretera 1011", "recepcionista", 0, 2600);
+INSERT INTO empleado VALUES ("0", "Carlos", "Díaz", "Gómez", 5500112233, "carlos@example.com", "callejon 1415", "limpiador", 0, 2400);
+
 
 create table sucursal(
     id int not null auto_increment primary key,
@@ -32,6 +42,12 @@ create table sucursal(
 );
 
 insert into sucursal values("0","Nicolas Romero");
+INSERT INTO sucursal VALUES ("0", "Toluca");
+INSERT INTO sucursal VALUES ("0", "Naucalpan");
+INSERT INTO sucursal VALUES ("0", "Cuautitlán Izcalli");
+INSERT INTO sucursal VALUES ("0", "Ecatepec");
+INSERT INTO sucursal VALUES ("0", "Atizapán de Zaragoza");
+
 
 create table cliente(
     id int not null auto_increment primary key,
@@ -40,6 +56,11 @@ create table cliente(
 );
 
 insert into cliente values("0",1,"Rodrigo Garcia");
+INSERT INTO cliente VALUES ("0", 2, "Ana López");
+INSERT INTO cliente VALUES ("0", 3, "Miguel Pérez");
+INSERT INTO cliente VALUES ("0", 4, "Laura Martínez");
+INSERT INTO cliente VALUES ("0", 5, "Sofía Hernández");
+INSERT INTO cliente VALUES ("0", 6, "Daniel González");
 
 create table comida(
     id int not null auto_increment primary key,
@@ -77,6 +98,12 @@ create table orden(
 );
 
 insert into orden values ("0",1,1,178);
+INSERT INTO orden VALUES ("0", 2, 2, 210);
+INSERT INTO orden VALUES ("0", 3, 3, 145);
+INSERT INTO orden VALUES ("0", 4, 4, 198);
+INSERT INTO orden VALUES ("0", 5, 5, 167);
+INSERT INTO orden VALUES ("0", 6, 6, 223);
+
 
 
 SELECT c.id AS cliente_id, c.mesa, c.nombre, o.id AS orden_id, o.comida_id, o.total
