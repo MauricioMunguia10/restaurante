@@ -63,30 +63,48 @@ function validarEmail(email) {
 }
 
 function cargarLogIn(){  
-    addEvent(document.getElementById("btn_cerrar_sesion"),"click",cerrarSesion,false); 
+    
     addEvent(document.getElementById("btn_iniciar_sesion"),"click",verificaInicio,false);
     addEvent(document.getElementById("btn_registrar"),"click",verificaRegistro,false);
 }
 function verificaRegistro(){
     datos();
     if(correo=="" || contrasena==""){
-        alert("Datos incompletos");
+        Swal.fire({
+            title: "Error",
+            text: "Datos incompletos",
+            icon: "error"
+        });
     }else{
         if(validarEmail(correo))
             registrar();
-        else
-            alert("email invalido");
+        else{
+            Swal.fire({
+                title: "Error",
+                text: "Correo invalido",
+                icon: "error"
+            });
+        }
     }
 }
 function verificaInicio(){
     datos();
     if(correo=="" || contrasena==""){
-        alert("Datos incompletos");
+        Swal.fire({
+            title: "Error",
+            text: "Datos incompletos",
+            icon: "error"
+        });
     }else{
-        if(validarEmail(correo))
+        if(validarEmail(correo)){
             iniciarSesion();
-        else
-            alert("email invalido");
+        }else{
+                Swal.fire({
+                    title: "Error",
+                    text: "Correo invalido",
+                    icon: "error"
+                });
+            }
     }
 }
 function datos(){
@@ -135,7 +153,21 @@ function registrar(){
 function esperaResultado1(){
     count++;
     if(conexion.readyState==4){
-        alert(conexion.responseText);  
+        let msg = conexion.responseText;
+        if(msg==""){
+            Swal.fire({
+                title: "Exito",
+                text: "Guardado con exito",
+                icon: "success"
+            }); 
+        }else{
+            Swal.fire({
+                title: "Error",
+                text: msg,
+                icon: "warning"
+            }); 
+        }
+         
         count=0;
     }
 }
@@ -155,9 +187,17 @@ function esperaResultado(){
         let estado = 0;
         estado = conexion.responseText;
         if(estado == 0){
-            alert("No estas registrado");
+            Swal.fire({
+                title: "Error",
+                text: "No estas registrado",
+                icon: "warning"
+            }); 
         }else if(estado == 1){
-            alert("Contraseña incorrecta");
+            Swal.fire({
+                title: "Error",
+                text: "Contraseña incorrecta",
+                icon: "warning"
+            }); 
         }else if(estado == 2){
             //alert("Inicio exitoso");
             window.open("inicio.html","_self");
@@ -274,7 +314,11 @@ function datosEmpleado(){
 function verificaCampos(){
     datosEmpleado();
     if(nombre=="" || p_apellido=="" || s_apellido=="" || telefono=="" || email=="" || direccion=="" || puesto=="" || rol=="" || salario==""){
-        alert("Datos incompletos")
+        Swal.fire({
+            title: "Error",
+            text: "Datos incompletos",
+            icon: "warning"
+        }); 
     }else{
         guardarEmpleado();
     }
@@ -348,7 +392,11 @@ function verificaDatosCliente(){
     let nombre_cliente = document.getElementById("txt_nombre_cliente").value;
     let mesa = document.getElementById("txt_mesa").value;
     if(nombre_cliente=="" || mesa==""){
-        alert("Faltan Datos");
+        Swal.fire({
+            title: "Error",
+            text: "Faltan datos",
+            icon: "warning"
+        }); 
     }else{
         registrarCliente();
     }
@@ -372,7 +420,11 @@ function verificaDatosOrden(){
         i++;
     }
     if(sucursal_tipo==0 || estado==false || id_cliente_p=="" || nom_cliente_p=="" || mesa_cliente_p==""){
-        alert("Faltan Datos");
+        Swal.fire({
+            title: "Error",
+            text: "Faltan datos",
+            icon: "warning"
+        }); 
     }else{
         
         generaOrden();
@@ -452,7 +504,11 @@ function registrarCliente(){
     conexion.open("POST","php/cliente.php",true);   
     conexion.setRequestHeader("Content-type","application/x-www-form-urlencoded");
     if(nombre_cliente=="" || mesa==""){
-        alert("datos incompletos");
+        Swal.fire({
+            title: "Error",
+            text: "Faltan datos",
+            icon: "warning"
+        }); 
     } else{
         //alert(nombre_cliente+""+mesa);
         conexion.send("v1="+nombre_cliente+"&v2="+mesa);
@@ -824,7 +880,11 @@ function cerrarSesion(){
 }
 function esperaCierre(){ 
     if(conexion.readyState == 4){
-        alert("sesion cerrada");
+        Swal.fire({
+            title: "Adios",
+            text: "Se cerro la sesion",
+            icon: "info"
+        }); 
         window.open("index.html","_self");
         
     }

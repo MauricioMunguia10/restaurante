@@ -32,9 +32,9 @@ if($email && $pswd){
         
         //Si la consulta se ejecuto correctamente $insertar vale 1     
         if($insertar==1){          
-        echo("El registro se guardo  correctamente=".!$cn->connect_errno. "Insertar =". $insertar); 
+        //echo("El registro se guardo  correctamente=".!$cn->connect_errno. "Insertar =". $insertar); 
         }else{
-        echo("No se guardo el registro".$cn->error."insertar=".$insertar); //$insertar no devuielve ningun valor cuando falla la consulta
+        //echo("No se guardo el registro".$cn->error."insertar=".$insertar); //$insertar no devuielve ningun valor cuando falla la consulta
         }
         $cn->close();
         
