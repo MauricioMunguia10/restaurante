@@ -53,9 +53,8 @@ function esperaUrl(){
  
 }
 //orden de venta
-function cargarOrden(){
-    buscaSesion();
-}
+
+
 //Log In
 function validarEmail(email) {
     // Expresión regular para validar un correo electrónico
@@ -63,7 +62,8 @@ function validarEmail(email) {
     return regex.test(email);
 }
 
-function cargarLogIn(){   
+function cargarLogIn(){  
+    addEvent(document.getElementById("btn_cerrar_sesion"),"click",cerrarSesion,false); 
     addEvent(document.getElementById("btn_iniciar_sesion"),"click",verificaInicio,false);
     addEvent(document.getElementById("btn_registrar"),"click",verificaRegistro,false);
 }
@@ -96,6 +96,7 @@ function datos(){
 //funcion de inicio
 function cargarInicio(){     
     buscaSesion();
+    addEvent(document.getElementById("btn_cerrar_sesion"),"click",cerrarSesion,false);
     
 }
 
@@ -176,6 +177,7 @@ function cargarEmpleado(){
     empleados = document.getElementById("tbl_empleados");
     buscaSesion();
     buscaEmpleado();
+    addEvent(document.getElementById("btn_cerrar_sesion"),"click",cerrarSesion,false);
     
 }
 //Crea tabla empleados
@@ -303,7 +305,8 @@ function destruir(){
 
 //orden
 function cargarOrden(){
-    
+    buscaSesion();
+    addEvent(document.getElementById("btn_cerrar_sesion"),"click",cerrarSesion,false);
     desayuno = document.getElementById("desayuno");
     comida = document.getElementById("comida");
     bebidas = document.getElementById("bebidas");
@@ -704,6 +707,7 @@ function cargarMenu(){
     desayuno = document.getElementById("desayuno");
     comida = document.getElementById("comida");
     bebidas = document.getElementById("bebidas");
+    addEvent(document.getElementById("btn_cerrar_sesion"),"click",cerrarSesion,false);
     //buscaTotal();
     conexion = xmlhttprequest();
     conexion.onreadystatechange = esperaMenu;
@@ -805,6 +809,23 @@ function crearMenu(){
             l++;
         }
         
+        
+    }
+}
+
+
+function cerrarSesion(){
+    conexion = xmlhttprequest();
+    conexion.onreadystatechange = esperaCierre;
+    conexion.open("POST","php/cerrar_sesion.php",true);   
+    conexion.setRequestHeader("Content-type","application/x-www-form-urlencoded");  
+    conexion.send();
+   
+}
+function esperaCierre(){ 
+    if(conexion.readyState == 4){
+        alert("sesion cerrada");
+        window.open("index.html","_self");
         
     }
 }
