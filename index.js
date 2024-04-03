@@ -700,3 +700,111 @@ function crearTotales(){
     }
 
 }
+function cargarMenu(){
+    desayuno = document.getElementById("desayuno");
+    comida = document.getElementById("comida");
+    bebidas = document.getElementById("bebidas");
+    //buscaTotal();
+    conexion = xmlhttprequest();
+    conexion.onreadystatechange = esperaMenu;
+    conexion.open("POST","php/comida.php",true);   
+    conexion.setRequestHeader("Content-type","application/x-www-form-urlencoded");  
+    conexion.send();
+   
+}
+function esperaMenu(){ 
+    if(conexion.readyState == 4){
+        //alert(conexion.responseText);
+        arr_comida=eval(conexion.responseText);
+        //alert("entra");
+        crearMenu();
+        
+    }
+}
+
+function crearMenu(){
+    //alert("entra");
+    let fragment1=document.createDocumentFragment();
+    let fragment2=document.createDocumentFragment();
+    let fragment3=document.createDocumentFragment();
+    buscaSesion();
+    
+    for(let i=0;i<=arr_comida[0]["tam"];i++){
+        let categoria = arr_comida[0]["categoria"+i];
+        if(categoria=="Desayuno"){
+            
+            let li = document.createElement('li');
+            let label =  document.createElement('label');
+            let input =  document.createElement('p');
+            let span = document.createElement('span');
+            let span2 = document.createElement('span');
+            input.setAttribute("id","desayuno"+j);
+            input.setAttribute("value",arr_comida[0]["nombre"+i]);
+            label.setAttribute("for","desayuno"+j);
+            label.setAttribute("id","desayuno_l"+j);
+            label.textContent = arr_comida[0]["nombre"+i];
+            span.setAttribute("class","badge badge-dark");
+            span.textContent =arr_comida[0]["cantidad"+i]
+            span2.setAttribute("class","badge badge-primary");
+            span2.textContent ="$"+ arr_comida[0]["precio"+i];
+            li.setAttribute("class","list-group-item d-flex justify-content-between align-items-center");
+            li.appendChild(input);
+            li.appendChild(label);
+            li.appendChild(span);
+            li.appendChild(span2);
+            fragment1.appendChild(li);
+            desayuno.appendChild(fragment1);
+            j++;
+        }
+        if(categoria=="Comida"){
+            let li = document.createElement('li');
+            let label =  document.createElement('label');
+            let input =  document.createElement('p');
+            let span = document.createElement('span');
+            let span2 = document.createElement('span');
+            input.setAttribute("id","comida"+k);
+            input.setAttribute("value",arr_comida[0]["nombre"+i]);
+            label.setAttribute("for","comida"+k);
+            label.setAttribute("id","comida_l"+k);
+            label.textContent = arr_comida[0]["nombre"+i];
+            span.setAttribute("class","badge badge-dark");
+            span.textContent =arr_comida[0]["cantidad"+i]
+            span2.setAttribute("class","badge badge-primary");
+            span2.textContent ="$"+ arr_comida[0]["precio"+i];
+            li.setAttribute("class","list-group-item d-flex justify-content-between align-items-center");
+            li.appendChild(input);
+            li.appendChild(label);
+            li.appendChild(span);
+            li.appendChild(span2);
+            fragment2.appendChild(li);
+            comida.appendChild(fragment2);
+            k++;
+        }
+        if(categoria=="Bebida"){
+            let li = document.createElement('li');
+            let label =  document.createElement('label');
+            let input =  document.createElement('p');
+            let span = document.createElement('span');
+            let span2 = document.createElement('span');
+            input.setAttribute("id","desayuno"+j);
+            input.setAttribute("value",arr_comida[0]["nombre"+i]);
+            label.setAttribute("for","bebida"+l);
+            label.setAttribute("id","bebida_l"+l);
+            label.textContent = arr_comida[0]["nombre"+i];
+            span.setAttribute("class","badge badge-primary");
+            span2.setAttribute("class","badge badge-dark");
+            span2.textContent =arr_comida[0]["cantidad"+i]
+            span.textContent ="$"+ arr_comida[0]["precio"+i]
+            li.setAttribute("class","list-group-item d-flex justify-content-between align-items-center");
+            li.appendChild(input);
+            li.appendChild(label);
+            li.appendChild(span2);
+            li.appendChild(span);
+            fragment3.appendChild(li);
+            bebidas.appendChild(fragment3);
+            l++;
+        }
+        
+        
+    }
+}
