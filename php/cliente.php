@@ -24,7 +24,9 @@ $consulta = $cn->query("SELECT * FROM cliente");
         }
         $cn->close();
         
-    }else //2054 es el valor que devuelve $cn->connect_errno
+    }else{
+        $id=0;
+    }//2054 es el valor que devuelve $cn->connect_errno
             //Si la conexión falla 
         //echo("Fallo la Conexión".$cn->connect_errno); 
         //Error(500) interno del servidor, checar sintaxis en php

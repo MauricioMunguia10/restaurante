@@ -8,7 +8,7 @@ let empleados, arr_empleado;
 let arr_comida, desayuno, comida, bebidas;
 let j=1,k=1,l=1,total;
 let m,n=5;
-let id_cliente;
+let id_cliente=0;
 let arr_orden, ordenes;
 let arr_total, clientes;
 let arr_sucursal, sucursal;
@@ -303,20 +303,77 @@ function destruir(){
 
 //orden
 function cargarOrden(){
-    creaMenu();
+   
     desayuno = document.getElementById("desayuno");
     comida = document.getElementById("comida");
     bebidas = document.getElementById("bebidas");
-    addEvent(document.getElementById("btn_registrar_cliente"),'click',registrarCliente,false);
-    addEvent(document.getElementById("btn_generar_orden"),'click',generaOrden,false);
+    addEvent(document.getElementById("btn_registrar_cliente"),'click',verificaDatosCliente,false);
+    addEvent(document.getElementById("btn_generar_orden"),'click',verificaDatosOrden,false);
+    addEvent(document.getElementById("btn_limpiar"),'click',limpiarTablas,false);
     ordenes = document.getElementById("tbl_ordenes");
     clientes = document.getElementById("tbl_clientes");
     sucursal = document.getElementById("sucursalSelect");
     //creaTablas();
     destruirTablas();
     buscaOrden();
-    buscaSucursal();
     
+    creaMenu();
+   
+   
+    
+}
+function limpiarTablas(){
+
+    conexion=xmlhttprequest();
+    conexion.onreadystatechange=esperaLimpia;
+    conexion.open("POST","php/limpiar.php",true); 
+    conexion.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    conexion.send();
+    //alert(puesto)
+}
+function esperaLimpia(){
+    count++;
+    if(conexion.readyState==4){
+        //alert("limpio");
+        
+        
+        destruirTablas();
+        id_cliente=0;
+    }
+}
+function verificaDatosCliente(){
+    let nombre_cliente = document.getElementById("txt_nombre_cliente").value;
+    let mesa = document.getElementById("txt_mesa").value;
+    if(nombre_cliente=="" || mesa==""){
+        alert("Faltan Datos");
+    }else{
+        registrarCliente();
+    }
+}
+function verificaDatosOrden(){
+    let sucursal_tipo = document.getElementById("sucursalSelect").value;
+    let arr_comida_pedir=document.getElementsByTagName("input");
+    let id_cliente_p = document.getElementById("txt_id").value;
+    let m = j + k + l + 5;
+    let nom_cliente_p = document.getElementById("txt_name").value;
+    let mesa_cliente_p = document.getElementById("txt_mesa_dos").value;
+
+
+    let i = 0;
+    let estado=false;
+    while (i <= m && i < arr_comida_pedir.length) {
+        if (arr_comida_pedir[i].checked) {
+            n = arr_comida_pedir[i].value;
+            estado=true;
+        }
+        i++;
+    }
+    if(sucursal_tipo==0 || estado==false || id_cliente_p=="" || nom_cliente_p=="" || mesa_cliente_p==""){
+        alert("Faltan Datos");
+    }else{
+        
+        generaOrden();
+    }
 }
 function buscaSucursal(){
     conexion = xmlhttprequest();
@@ -325,6 +382,7 @@ function buscaSucursal(){
     conexion.setRequestHeader("Content-type","application/x-www-form-urlencoded");  
     conexion.send();
     
+    
 }
 function esperaSucursal(){ 
     if(conexion.readyState == 4){
@@ -332,6 +390,8 @@ function esperaSucursal(){
         //alert(arr_sucursal[0]["id1"]);
         agregaSucursales();
         buscaOrden();
+        //creaMenu();
+        
     }
 }  
 function agregaSucursales(){
@@ -376,7 +436,9 @@ function guardaOrden() {
         //alert(conexion.responseText);
         
         //alert("orden generada");
+        destruirTablas();
         buscaOrden();
+        buscaTotal();buscaOrden();
     }
 }
 function registrarCliente(){
@@ -418,14 +480,15 @@ function esperaOrden(){
     if(conexion.readyState == 4){
         //alert(conexion.responseText);
         arr_comida=eval(conexion.responseText);
-        
+        alert("entra")
         crearTarjetas();
         buscaSesion();
+        buscaSucursal();
         
     }
 }
 function destruirTablas(){
-    alert("entra");
+    //alert("entra");
     document.getElementById("tbl_ordenes").innerHTML = '<tbody id="tbl_ordenes"></tbody>';
     document.getElementById("tbl_clientes").innerHTML = '<tbody id="tbl_clientes"></tbody>';
 }
@@ -591,6 +654,7 @@ function esperaTotales(){
         arr_total=eval(conexion.responseText);
         //alert(arr_total[0]["tam"]);
         crearTotales();
+        
         
     }
 }  
